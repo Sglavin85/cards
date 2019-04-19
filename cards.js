@@ -16,21 +16,12 @@ function postText(textToPost, cardId){
     </article`
 }
 
-//adds a listener for the delete button that is added when a new post is made
-function createDeleteListener (cardId){
-    let listenerToCreate = document.getElementById(`delete--${cardId}`)
-    listenerToCreate.addEventListener("click", () =>{
-        document.getElementById(`card--${cardId}`).remove()
-    })
-}
-
-//Listens to text input and adds content to a var and if user hits enter the text submits as if the button was used
+//Listens to text input and pushes content into the function postText and if user hits enter the text submits the form
 
 textBoxListener.addEventListener("keyup", event => {
     textToPost = event.target.value;
     if (event.keyCode === 13) {
         postText (textToPost, cardId);
-        // createDeleteListener(cardId);
         cardId = cardId + 1;
     }
     looper()
@@ -40,7 +31,6 @@ textBoxListener.addEventListener("keyup", event => {
 
 btnPost.addEventListener("click", () => {
     postText (textToPost, cardId);
-    // createDeleteListener(cardId);
     cardId = cardId + 1;
     looper();
 });
@@ -55,5 +45,7 @@ for (i = 0 ; i < deleteBtnCollector.length; i++) {
     })
 };
 }
+
+//first looper runs on page load to make the posts that are hard coded work.
 
 looper();
